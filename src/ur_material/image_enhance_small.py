@@ -242,6 +242,9 @@ def convert_to_grayscale_8uc1(img):
     return gray_img_8uc1
 
 if __name__ == "__main__":
-    image = cv2.imread("./img_src/1.png", cv2.IMREAD_UNCHANGED)
+    image = cv2.imread("../../img_src/1.png", cv2.IMREAD_UNCHANGED)
 
-    image = image_augmentation_10(image)
+    image = image_augmentation_19(image)
+
+    cv2.imshow("augmented", image)
+    cv2.waitKey(0)

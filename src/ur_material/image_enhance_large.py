@@ -206,7 +206,7 @@ def pre_process(image):
     return image
 
 if __name__ == "__main__":
-    image = cv2.imread("./img_src_s/clean_15726443_01.png")
+    image = cv2.imread("../../img_src_s/clean_15726443_01.png")
 
     # image = image_augmentation_1(image)
     # image = image_augmentation_2(image)
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     # image = image_augmentation_12(image)
     # image = image_augmentation_13(image)
     # image = image_augmentation_14(image)
-    image = image_augmentation_15(image)
+    image = image_augmentation_1(image)
 
     cv2.imshow("image", image)
     cv2.waitKey(0)
