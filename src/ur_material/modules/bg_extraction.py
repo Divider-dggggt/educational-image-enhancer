@@ -95,7 +95,7 @@ def find_max_white_region(binary_image, random_seed=42):
     max_white_rect = expand_points(random_points, binary_image)
     return max_white_rect
 
-def bg_extraction(output_file,file_image="./hs_che_examples/0ca9e36096694648a90cfa8817c836e6.jpg", save=True):
+def bg_extraction_method(output_file,file_image="./hs_che_examples/0ca9e36096694648a90cfa8817c836e6.jpg", save=True):
     # image_gray = cv2.imread(file_image, 0)
     image = crop_white_borders(file_image, "s0.jpg", save=False)
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

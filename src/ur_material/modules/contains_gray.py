@@ -3,7 +3,7 @@ import numpy as np
 
 # check if an image contains gray parts, so that it can't be binaryzied
 # return true if there are gray parts
-def contains_gray(image, threshold=10, gray_range=(30, 30)):  #gray_range=(70, 230)
+def contains_gray_method(image, threshold=10, gray_range=(30, 30)):  #gray_range=(70, 230)
     """
     判断给定的灰度图像是否包含灰色阴影。
     :param image: cv2读取后的灰度图像

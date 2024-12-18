@@ -5,10 +5,10 @@ import imgaug.augmenters as iaa
 import os
 import cv2
 import numpy as np
-from modules import overlap_final
-from modules import perspective_transform
-from modules import elastic_transform as ela
-from modules import texture_overlap
+from ur_material.modules import overlap_final
+from ur_material.modules import perspective_transform
+from ur_material.modules import elastic_transform as ela
+from ur_material.modules import texture_overlap
 import genalog.degradation.effect as effect
 from augraphy import *
 
@@ -38,9 +38,9 @@ def add_texture(image, file_name=None, save=False, use_synthetic=False, random_s
     random.seed(random_seed)
 
     if use_synthetic:
-        texture_paths = [f"../texture/texture_{i}.jpg" for i in range(1, 7)]
+        texture_paths = [f"{os.path.dirname(__file__)}/../../texture/texture_{i}.jpg" for i in range(1, 7)]
     else:
-        texture_paths = [f"../texture_yellow/{f}" for f in os.listdir("../texture_yellow") if f.endswith(".png")]
+        texture_paths = [f"{os.path.dirname(__file__)}/../../texture_yellow/{f}" for f in os.listdir(f"{os.path.dirname(__file__)}/../../texture_yellow") if f.endswith(".png")]
     texture_path = random.choice(texture_paths)
     background = cv2.imread(texture_path, cv2.IMREAD_UNCHANGED)
     # pepper the background img
@@ -57,7 +57,7 @@ def increase_darkness(image, file_name=None, save=False, random_seed=42):
     random.seed(random_seed)
 
     # 加深
-    foreground_path = [f"../texture_dark_combine/{f}" for f in os.listdir("../texture_dark_combine") if f.endswith(".png")]
+    foreground_path = [f"../../texture_dark_combine/{f}" for f in os.listdir("../texture_dark_combine") if f.endswith(".png")]
     foreground = cv2.imread(random.choice(foreground_path), cv2.IMREAD_UNCHANGED)
 
     result = texture_overlap.blend_images(foreground, image, 0.3)

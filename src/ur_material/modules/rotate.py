@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import random
 
-def rotate(image, file_name=None, save=False, random_seed=42):
+def rotate_method(image, file_name=None, save=False, random_seed=42):
     """
     旋转图像并用指定颜色填充空白区域。
     

@@ -4,8 +4,8 @@ import numpy as np
 import json
 from scipy.ndimage import gaussian_filter, map_coordinates
 import os
-from modules import perspective_transform,warp_texture_blur_sticker,rotate
-from modules import bg_extraction
+from ur_material.modules import perspective_transform,warp_texture_blur_sticker,rotate
+from ur_material.modules import bg_extraction
 from pqdm.processes import pqdm
 
 
@@ -143,7 +143,7 @@ def single_color_extraction(image_path, file_name, det_type, label, json_output_
     with open(json_output_file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
-def color_extraction(image_path, file_name, det_type, json_output_file, from_path):
+def color_extraction_method(image_path, file_name, det_type, json_output_file, from_path):
     colors_mapp_else = {
         "option": {"color": [0, 255, 0]},
         "blank": {"color": [0, 255, 255]},
@@ -201,7 +201,7 @@ def warp_mask(json_file, json_file_warped, file_name, shape_change, warp, crop_a
         if warp:
             blank_image = warp_texture_blur_sticker.elastic_transform(blank_image,'', random_seed=random_seed, crop_by_amount=True, crop_amount=crop_amount)
         if is_rotated:
-            blank_image = rotate.rotate(blank_image,'',False,random_seed=random_seed)
+            blank_image = rotate.rotate_method(blank_image,'',False,random_seed=random_seed)
         blank_image = cv2.bitwise_not(blank_image)
         # cv2.imwrite(f'./1/{file_name}.jpg', perspective_transform.main(cv2.imread(image_path)))
         # cv2.imwrite('./test_5.jpg', blank_image)

@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import random
 import genalog.degradation.effect as effect
-from modules import add_ink_leak
+from ur_material.modules import add_ink_leak
 from augraphy import *
 
 

@@ -3,7 +3,7 @@ import numpy as np
 from augraphy import *
 import random
 
-def half_paper(image, file_name=None, save=False, random_seed=80):
+def half_paper_method(image, file_name=None, save=False, random_seed=80):
     # Set random seed for reproducibility
     random.seed(random_seed)
     np.random.seed(random_seed)
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     image = cv2.imread("./img_src/clean_15726443_06.png")
 
     # Apply the half_paper function
-    final_image = half_paper(image)
+    final_image = half_paper_method(image)
 
     # Display the result
     cv2.imshow('Result', final_image)

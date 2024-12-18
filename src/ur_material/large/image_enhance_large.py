@@ -3,8 +3,8 @@ import random
 from PIL import Image
 import os
 import cv2
-from ur_material.modules import add_shadow_final, add_watermark, add_ink_leak, perspective_transform, make_it_old_final, ink_reduce, contains_gray, color_extraction, bg_extraction\
-    , general_quality_reduce, half_paper, scanned, add_dots
+from ur_material.modules import add_shadow_final, add_watermark, add_ink_leak, perspective_transform, make_it_old_final, ink_reduce\
+    , general_quality_reduce, half_paper, add_dots
 from ur_material.modules import warp_texture_blur_sticker
 from tqdm import tqdm
 from pqdm.processes import pqdm
@@ -53,7 +53,7 @@ def image_augmentation_3(image, save=False, random_seed=42):
 def image_augmentation_4(image, save=False, random_seed=42):
     image = pre_process(image)
     random.seed(random_seed)
-    image = add_ink_leak.add_ink_leak(image, save=False, partial_old=True, random_seed=random_seed)   # partial_old=True
+    image = add_ink_leak.add_ink_leak_method(image, save=False, partial_old=True, random_seed=random_seed)   # partial_old=True
     image = warp_texture_blur_sticker.motionblur(image, save=False)
     if random.random() < 0.8:
         image = perspective_transform.main(image, save=save, random_seed=random_seed)
@@ -70,7 +70,7 @@ def image_augmentation_5(image, save=False, random_seed=42):
 def image_augmentation_6(image, save=False, random_seed=42): 
     image = pre_process(image)
     random.seed(random_seed)
-    image = ink_reduce.ink_reduce(image, 0.3, save=False)
+    image = ink_reduce.ink_reduce_method(image, 0.3, save=False)
     return image
 
 def image_augmentation_7(image, save=False, random_seed=42):   
@@ -78,7 +78,7 @@ def image_augmentation_7(image, save=False, random_seed=42):
     random.seed(random_seed)
     image = make_it_old_final.make_it_old(image, save=False, random_seed=random_seed)
     image, crop_amount = warp_texture_blur_sticker.elastic_transform(image,alpha_range=100, movement=100, random_seed=random_seed, save=False)
-    image = add_ink_leak.add_ink_leak(image, save=False, random_seed=random_seed)
+    image = add_ink_leak.add_ink_leak_method(image, save=False, random_seed=random_seed)
     return image
 
 def image_augmentation_8(image, save=False, random_seed=42):  
@@ -108,7 +108,7 @@ def image_augmentation_11(image, save=False, random_seed=42):
     image = pre_process(image)
     random.seed(random_seed)
     image = ink_reduce.dilate_erode_reduce(image, save=False)
-    image = ink_reduce.ink_reduce(image, 0.2, save=False)
+    image = ink_reduce.ink_reduce_method(image, 0.2, save=False)
     image = general_quality_reduce.reduce(image, (20, 30), (2,2), save=False)
     return image
 
@@ -116,7 +116,7 @@ def image_augmentation_12(image, save=False, random_seed=42):
     image = pre_process(image)
     random.seed(random_seed)
     image = make_it_old_final.erode_alot_l(image, save=False)
-    image = half_paper.half_paper(image, save=False, random_seed=random_seed)
+    image = half_paper.half_paper_method(image, save=False, random_seed=random_seed)
     return image
 
 def image_augmentation_13(image, save=False, random_seed=42):
@@ -125,8 +125,8 @@ def image_augmentation_13(image, save=False, random_seed=42):
     # List of effects and their parameters
     effects = [
         lambda img: warp_texture_blur_sticker.motionblur(img, save=False),
-        lambda img: add_ink_leak.add_ink_leak(img, save=False, partial_old=True, random_seed=random_seed),
-        lambda img: ink_reduce.ink_reduce(img, 0.2, save=False),
+        lambda img: add_ink_leak.add_ink_leak_method(img, save=False, partial_old=True, random_seed=random_seed),
+        lambda img: ink_reduce.ink_reduce_method(img, 0.2, save=False),
         lambda img: add_watermark.add_water_mark(img, save=False, random_seed=random_seed),
         lambda img: general_quality_reduce.reduce(img, (30, 40), (2, 2), save=False),
         lambda img: general_quality_reduce.blur(img, (3, 3), save=False)
@@ -204,25 +204,3 @@ def pre_process(image):
     image = convert_to_grayscale_8uc1(image)
 
     return image
-
-if __name__ == "__main__":
-    image = cv2.imread("../../img_src_s/clean_15726443_01.png")
-
-    # image = image_augmentation_1(image)
-    # image = image_augmentation_2(image)
-    # image = image_augmentation_3(image)
-    # image = image_augmentation_4(image)
-    # image = image_augmentation_5(image)
-    # image = image_augmentation_6(image)
-    # image = image_augmentation_7(image)
-    # image = image_augmentation_8(image)
-    # image = image_augmentation_9(image)
-    # image = image_augmentation_10(image)
-    # image = image_augmentation_11(image)
-    # image = image_augmentation_12(image)
-    # image = image_augmentation_13(image)
-    # image = image_augmentation_14(image)
-    image = image_augmentation_1(image)
-
-    cv2.imshow("image", image)
-    cv2.waitKey(0)

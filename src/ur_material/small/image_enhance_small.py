@@ -3,9 +3,9 @@ import random
 from PIL import Image
 import os
 import cv2
-from modules import add_shadow_final, add_watermark, add_ink_leak, perspective_transform, make_it_old_final, ink_reduce, contains_gray, rotate, bg_extraction\
-    ,general_quality_reduce, seperate_lines, add_dots, random_break_reduce
-from modules import warp_texture_blur_sticker
+from ur_material.modules import add_watermark, add_ink_leak, make_it_old_final, ink_reduce,\
+    general_quality_reduce, seperate_lines, add_dots, random_break_reduce
+from ur_material.modules import warp_texture_blur_sticker
 from tqdm import tqdm
 from pqdm.processes import pqdm
 from augraphy import *
@@ -50,7 +50,7 @@ def image_augmentation_3(image, save=False, random_seed=42): # 3M -> 12M
 def image_augmentation_4(image, save=False, random_seed=42):     # 3M -> 17M
     image = pre_process(image)
     random.seed(random_seed)
-    image = add_ink_leak.add_ink_leak(image, save=False, partial_old=False, random_seed=random_seed)   # partial_old=True
+    image = add_ink_leak.add_ink_leak_method(image, save=False, partial_old=False, random_seed=random_seed)   # partial_old=True
     image = warp_texture_blur_sticker.motionblur(image, save=False)
     return image
 
@@ -63,7 +63,7 @@ def image_augmentation_5(image, save=False, random_seed=42):     # 3M -> 15M
 def image_augmentation_6(image, save=False, random_seed=42):      # 油墨减少，纸张纹理，弹性变换     # 3M -> 17M
     image = pre_process(image)
     random.seed(random_seed)
-    image = ink_reduce.ink_reduce(image, 0.3, save=False)
+    image = ink_reduce.ink_reduce_method(image, 0.3, save=False)
     image = general_quality_reduce.reduce(image,(15,20), (3,3), save=False)
     return image
 
@@ -92,14 +92,14 @@ def image_augmentation_9(image, save=False, random_seed=42):     # 3M -> 12M
 def image_augmentation_10(image, save=False, random_seed=42):        # 3M -> 16M
     image = pre_process(image)
     random.seed(random_seed)
-    image = ink_reduce.ink_reduce(image, 0.3, save=False)
+    image = ink_reduce.ink_reduce_method(image, 0.3, save=False)
     image = general_quality_reduce.reduce(image, (40, 50), (2,2), save=False)
     return image
 
 def image_augmentation_11(image, save=False, random_seed=42):      # 对应效果二      # 3M -> 20M
     image = pre_process(image)
     random.seed(random_seed)
-    image = ink_reduce.ink_reduce(image, 0.4, save=save, if_salt=False)
+    image = ink_reduce.ink_reduce_method(image, 0.4, save=save, if_salt=False)
     image = warp_texture_blur_sticker.add_texture(image, save=False, random_seed=random_seed)
     image = general_quality_reduce.blur(image, (11,11), save=False)
     image = general_quality_reduce.reduce(image, (40,50), (5,5), save=False)
@@ -179,8 +179,8 @@ def image_augmentation_19(image, save=False, random_seed=42):
     # List of effects and their parameters
     effects = [
         lambda img: warp_texture_blur_sticker.motionblur(img, save=False),
-        lambda img: add_ink_leak.add_ink_leak(img, save=False, partial_old=True, random_seed=random_seed),
-        lambda img: ink_reduce.ink_reduce(img, 0.2, save=False),
+        lambda img: add_ink_leak.add_ink_leak_method(img, save=False, partial_old=True, random_seed=random_seed),
+        lambda img: ink_reduce.ink_reduce_method(img, 0.2, save=False),
         lambda img: add_watermark.add_water_mark(img, save=False, random_seed=random_seed),
         lambda img: general_quality_reduce.reduce(img, (30, 40), (2, 2), save=False),
         lambda img: general_quality_reduce.blur(img, (3, 3), save=False)
