@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: ur_material
+Version: 0.1.0
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy==1.26.4
+Requires-Dist: augraphy==8.2.6
+Requires-Dist: imgaug==0.4.0
+Requires-Dist: requests>=2.24.0
+
+# Ur_material
+## A tool helps you to generate your own materials given clean files
