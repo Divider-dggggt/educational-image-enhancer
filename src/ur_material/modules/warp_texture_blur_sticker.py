@@ -38,9 +38,9 @@ def add_texture(image, file_name=None, save=False, use_synthetic=False, random_s
     random.seed(random_seed)
 
     if use_synthetic:
-        texture_paths = [f"{os.path.dirname(__file__)}/../../texture/texture_{i}.jpg" for i in range(1, 7)]
+        texture_paths = [f"{os.path.dirname(__file__)}/../../texture/{f}" for f in os.listdir(f"{os.path.dirname(__file__)}/../../texture") if f.endswith(".jpg")]
     else:
-        texture_paths = [f"{os.path.dirname(__file__)}/../../texture_yellow/{f}" for f in os.listdir(f"{os.path.dirname(__file__)}/../../texture_yellow") if f.endswith(".png")]
+        texture_paths = [f"{os.path.dirname(__file__)}/../../texture/{f}" for f in os.listdir(f"{os.path.dirname(__file__)}/../../texture") if f.endswith(".png")]
     texture_path = random.choice(texture_paths)
     background = cv2.imread(texture_path, cv2.IMREAD_UNCHANGED)
     # pepper the background img
