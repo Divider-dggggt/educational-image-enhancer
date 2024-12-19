@@ -1,8 +1,8 @@
 import os
 import cv2
-from modules import ink_leak_final
-from modules import overlap_final
-from modules import make_it_old_final
+from ur_material.modules import ink_leak_final
+from ur_material.modules import overlap_final
+from ur_material.modules import make_it_old_final
 import random
 import numpy as np
 import cProfile
@@ -77,7 +77,7 @@ def bleed(image, file_name=None, save=False, kernel_size=(4,4)):
 
 
 
-def add_ink_leak(image, file_name=None, save=False, partial_old=False, region_size=(60, 80), random_seed=42):
+def add_ink_leak_method(image, file_name=None, save=False, partial_old=False, region_size=(60, 80), random_seed=42):
 
     random.seed(random_seed)
 

@@ -16,7 +16,7 @@ def dilate_erode_reduce(image, file_name=None, save=False):
 
     return image
 
-def ink_reduce(image, reduce_percentage, file_name=None, save=False, if_salt=True):
+def ink_reduce_method(image, reduce_percentage, file_name=None, save=False, if_salt=True):
 
     if len(image.shape) != 2:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

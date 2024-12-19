@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import genalog.degradation.effect as effect
 from genalog.degradation.degrader import Degrader
-from modules import overlap_final
+from ur_material.modules import overlap_final
 
 # Step 1: 读取灰度图像
 def ink_leak(image):
