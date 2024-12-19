@@ -46,13 +46,13 @@ def erosed_low_quality(image):
     return image_augmentation_11(image)
 
 def random_impact(image):
-    
-    return image_augmentation_12(image)
+
+    return image_augmentation_13(image)
 
 def scanned_ink(image):
     
-    return image_augmentation_13(image)
+    return image_augmentation_14(image)
 
 def twisted_paper(image):
     
-    return image_augmentation_14(image)
+    return image_augmentation_15(image)
