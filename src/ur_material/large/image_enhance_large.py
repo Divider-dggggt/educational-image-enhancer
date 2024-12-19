@@ -33,7 +33,7 @@ def image_augmentation_2(image, save=False, random_seed=42):
         image = perspective_transform.main(image, save=save, random_seed=random_seed)
     image = add_ink_leak.increase_ink_by_percentage(image, 1.1, save=False)
     image = warp_texture_blur_sticker.add_texture(image, save=save, random_seed=random_seed)
-    image = add_ink_leak.add_ink_leak(image, save=False, random_seed=random_seed)
+    image = add_ink_leak.add_ink_leak_method(image, save=False, random_seed=random_seed)
     if random.random() < 0.5:
         image = warp_texture_blur_sticker.increase_darkness(image, save=False, random_seed=random_seed)
     image = warp_texture_blur_sticker.motionblur(image, save=False)
@@ -154,12 +154,12 @@ def image_augmentation_14(image, save=False, random_seed=42):
     
     return image
 
-def image_augmentation_15(image, save=False, random_seed=42):
+def image_augmentation_15(image, save=False, random_seed=20):
     image = pre_process(image)
     image = add_ink_leak.increase_ink_by_percentage(image, 1.1, save=False)
     image, crop_amount = warp_texture_blur_sticker.elastic_transform(image,alpha_range=100, movement=100, random_seed=random_seed, save=save)
     image = warp_texture_blur_sticker.add_texture(image, save=save, random_seed=random_seed)
-    image = add_ink_leak.add_ink_leak(image, save=False, random_seed=random_seed)
+    image = add_ink_leak.add_ink_leak_method(image, save=False, random_seed=random_seed)
     image = general_quality_reduce.blur(image, (3,3), save=save)
 
     return image
